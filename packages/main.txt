@@ -3,6 +3,7 @@ neovim
 xdg-desktop-portal-gnome
 xwayland-satellite
 qt6ct
+nwg-look
 niri
 cava
 cliphist
