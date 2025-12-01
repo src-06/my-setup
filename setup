@@ -56,8 +56,11 @@ install() {
   p "${BLUE}Sync \"/home/$(whoami)/.local/share/*\"..."
   rsync -av $BASE_PATH/local/* ~/.local/
 
-  p "${BLUE}\"/home/$(whoami)/.config/*\"..."
+  p "${BLUE}Sync \"/home/$(whoami)/.config/*\"..."
   rsync -av $BASE_PATH/config/* ~/.config/
+
+  p "${BLUE}Set papirus folder to yaru"
+  papirus-folders -C yaru --theme Papirus-Dark
 }
 
 update() {
@@ -69,7 +72,7 @@ update() {
   p "${BLUE}Sync \"/home/$(whoami)/.local/share/*\"..."
   rsync -av $BASE_PATH/local/* ~/.local/
 
-  p "${BLUE}\"/home/$(whoami)/.config/*\"..."
+  p "${BLUE}Sync \"/home/$(whoami)/.config/*\"..."
   rsync -av $BASE_PATH/config/* ~/.config/
 }
 

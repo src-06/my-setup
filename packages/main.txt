@@ -2,6 +2,7 @@ nix
 neovim
 xdg-desktop-portal-gnome
 xwayland-satellite
+qt6ct
 niri
 cava
 cliphist
@@ -17,3 +18,6 @@ github-desktop-bin
 pear-desktop-bin
 localsend-bin
 rsync
+noto-fonts-cjk
+papirus-icon-theme
+papirus-folders
