@@ -1,0 +1,10 @@
+.nix-defexpr
+.nix-profiles
+.nix-channels
+.nix
+.config/nix
+.local/state/nix
+.config/fish
+.config/kitty
+.config/niri
+.local/share/fonts
