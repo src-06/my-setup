@@ -1,2 +1,3 @@
 python-gobject
+udisks2
 man

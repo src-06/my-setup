@@ -22,3 +22,6 @@ rsync
 noto-fonts-cjk
 papirus-icon-theme
 papirus-folders
+visual-studio-code-bin
+btop
+fastfetch

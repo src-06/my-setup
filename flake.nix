@@ -74,6 +74,18 @@
           python3
         ];
       };
+
+      php = pkgs.mkFishShell {
+        name = "PHP";
+        buildInputs = with pkgs; [
+          php83
+          php83Packages.composer
+          nodejs-slim
+        ];
+        shellHook = ''
+          export SHELL=/run/current-system/sw/bin/fish
+        '';
+      };
     };
   };
 }
