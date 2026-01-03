@@ -1,0 +1,23 @@
+
+window-rule {
+  geometry-corner-radius 10
+  clip-to-geometry true
+}
+
+window-rule {
+  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+  match app-id=r#"^org\.gnome\.World\.Secrets$"#
+  block-out-from "screen-capture"
+}
+
+layer-rule {
+  // match namespace="^noctalia-wallpaper*"
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
+/-overview {
+  workspace-shadow {
+    off
+  }
+}

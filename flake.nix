@@ -1,91 +1,72 @@
 {
-  description = "My arch + nix home manager configurations";
+  description = "My NixOS flake configurations";
 
   inputs = {
-    nixpkgs = {
-      url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-  let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [
-        (final: prev: {
-          mkFishShell = args:
-            prev.mkShell (args // {
-              buildInputs = (args.buildInputs or []) ++ [ prev.fish ];
-              shellHook = (args.shellHook or "") + ''
-                exec ${prev.fish}/bin/fish
-              '';
-            });
-        })
-      ];
-    };
-  in {
-    homeConfigurations.leo = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      modules = [
-        ./home.nix
-      ];
-    };
-
-    devShells.${system} = {
-      default = pkgs.mkFishShell {
-        name = "Default";
-        shellHook = ''
-          echo "Default development (nothing add nix pkgs)..."
-        '';
-      };
-
-      nodejs = pkgs.mkFishShell {
-        name = "Node JS";
-        buildInputs = with pkgs; [
-          nodejs_24
-          pnpm
-        ];
-      };
-
-      bunjs = pkgs.mkFishShell {
-        name = "Bun JS";
-        buildInputs = with pkgs; [
-          bun
-        ];
-      };
-
-      cpp = pkgs.mkFishShell {
-        name = "C/C++";
-        buildInputs = with pkgs; [
-          gcc
-        ];
-      };
-
-      python = pkgs.mkFishShell {
-        name = "Python";
-        buildInputs = with pkgs; [
-          python3
-        ];
-      };
-
-      php = pkgs.mkFishShell {
-        name = "PHP";
-        buildInputs = with pkgs; [
-          php83
-          php83Packages.composer
-          nodejs-slim
-        ];
-        shellHook = ''
-          export SHELL=/run/current-system/sw/bin/fish
-        '';
-      };
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      noctalia-shell,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    in
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        inherit pkgs;
+        modules = [
+          ./modules/hardware.nix
+          ./modules/system.nix
+          ./modules/shell.nix
+          ./modules/users.nix
+          ./modules/fonts.nix
+          ./modules/de/plasma.nix
+          ./modules/wm/niri.nix
+          ./modules/developments/rdbms.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.leo = {
+                imports = [
+                  ./home.nix
+
+                  noctalia-shell.homeModules.default
+                  ./modules/wm/noctalia.nix
+
+                  ./modules/developments/bun.nix
+                  ./modules/developments/cpp.nix
+                  ./modules/developments/nodejs.nix
+                  ./modules/developments/php.nix
+                  ./modules/developments/python.nix
+                ];
+              };
+            };
+          }
+        ];
+      };
+    };
 }
