@@ -2,11 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    quickshell
-    xdg-desktop-portal
-    gpu-screen-recorder
     cava
     cliphist
+    wtype
     matugen
     wlsunset
     pywalfox-native
@@ -32,20 +30,16 @@
       colorSchemes = {
         darkMode = true;
         useWallpaperColors = true;
-        matugenSchemeType = "scheme-content";
+        matugenSchemeType = "scheme-rainbow";
       };
 
       templates = {
         # UI
         gtk = true;
         qt = true;
-        kcolorscheme = true;
 
         # Compositor
         niri = true;
-
-        # Terminal
-        kitty = true;
 
         # Programs
         discord = true;
@@ -56,11 +50,12 @@
       wallpaper = {
         overviewEnabled = true;
         hideWallpaperFilenames = true;
-        randomEnabled = true;
       };
 
       bar = {
+        floating = true;
         backgroundOpacity = 1;
+        hideOnOverview = true;
 
         widgets = {
           left = [
@@ -68,8 +63,6 @@
               id = "ControlCenter";
               useDistroLogo = true;
             }
-            { id = "WiFi"; }
-            { id = "Bluetooth"; }
             {
               id = "SystemMonitor";
               compactMode = false;
@@ -97,23 +90,19 @@
             }
             { id = "Tray"; }
             { id = "NotificationHistory"; }
-            { id = "ScreenRecorder"; }
-            { id = "NoctaliaPerformance"; }
+            { id = "Volume"; }
+            { id = "Brightness"; }
             {
               id = "Battery";
               alwaysShowPercentage = false;
               warningThreshold = 30;
             }
-            { id = "Volume"; }
-            { id = "DarkMode"; }
-            { id = "NightLight"; }
-            { id = "Brightness"; }
+            { id = "Bluetooth"; }
+            { id = "WiFi"; }
             {
               id = "Clock";
               formatHorizontal = "h:mm AP";
               formatVertical = "h mm AP";
-              useMonospacedFont = true;
-              usePrimaryColor = true;
             }
             { id = "SessionMenu"; }
           ];
@@ -124,6 +113,22 @@
 
       controlCenter = {
         position = "top_left";
+        shortcuts = {
+          left = [
+            {
+              id = "Network";
+            }
+            {
+              id = "Bluetooth";
+            }
+            {
+              id = "DarkMode";
+            }
+            {
+              id = "WallpaperSelector";
+            }
+          ];
+        };
         cards = [
           {
             enabled = true;
@@ -156,6 +161,7 @@
         position = "follow_bar";
         showCategories = false;
         enableClipboardHistory = true;
+        autoPasteClipboard = true;
         sortByMostUsed = false;
         terminalCommand = "kitty -e";
       };
@@ -165,12 +171,37 @@
         1
         2
         3
-        4
       ];
 
       sessionMenu = {
         position = "top_right";
         showNumberLabels = false;
+        powerOptions = [
+          {
+            action = "lock";
+            enabled = true;
+          }
+          {
+            action = "suspend";
+            enabled = false;
+          }
+          {
+            action = "hibernate";
+            enabled = false;
+          }
+          {
+            action = "logout";
+            enabled = true;
+          }
+          {
+            action = "reboot";
+            enabled = true;
+          }
+          {
+            action = "shutdown";
+            enabled = true;
+          }
+        ];
       };
 
       calendar.cards = [
@@ -183,17 +214,13 @@
           id = "calendar-month-card";
         }
         {
-          enabled = false;
-          id = "timer-card";
-        }
-        {
           enabled = true;
           id = "weather-card";
         }
       ];
 
       location = {
-        name = "Desa Gunung Putri, Indonesia";
+        name = "Gunung Putri";
         monthBeforeDay = true;
         use12hourFormat = true;
       };

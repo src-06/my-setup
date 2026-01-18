@@ -2,8 +2,8 @@
 
 {
   home.stateVersion = "25.11";
-  home.username = "leo";
-  home.homeDirectory = "/home/leo";
+  home.username = "src-06";
+  home.homeDirectory = "/home/src-06";
 
   home.packages = with pkgs; [
     # Display device informations
@@ -13,39 +13,39 @@
     papirus-icon-theme
 
     # Browsers
+    brave
     firefox
-    chromium
 
     # Text editors
+    fresh-editor
     vscode
     zed-editor
 
     # Design
-    pinta
+    # pinta
 
     # Office
-    # kdePackages.calligra
-    # libreoffice
-    # onlyoffice-desktopeditors
     wpsoffice
 
     # Softwares
     gucharmap
     vesktop
     localsend
+    obs-studio
     github-desktop
     yt-dlp
     pear-desktop
 
     # Game launchers
+    (bottles.override { removeWarningPopup = true; })
     steam
-    lutris
 
     # Game Engine
-    godot
+    # godot
   ];
 
-  xdg.configFile."kitty/kitty.conf".source = ./config/kitty/kitty.conf;
+  xdg.configFile."fastfetch".source = ./config/fastfetch;
+  xdg.configFile."kitty".source = ./config/kitty;
   xdg.configFile."niri/config".source = ./config/niri/config;
   xdg.configFile."niri/config.kdl".source = ./config/niri/config.kdl;
 

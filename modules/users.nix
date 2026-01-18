@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 {
-  users.users.leo = {
+  users.users."src-06" = {
     isNormalUser = true;
-    home = "/home/leo";
+    home = "/home/src-06";
     description = "Gotthard Leo";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;

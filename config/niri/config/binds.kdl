@@ -11,7 +11,7 @@ binds {
 
   // Suggested binds for running applications
   Mod+Return  hotkey-overlay-title="Open a Terminal"        { spawn-sh "kitty -e"; }
-  Mod+E       hotkey-overlay-title="Open a File Manager"    { spawn "dolphin"; }
+  Mod+E       hotkey-overlay-title="Open a File Manager"    { spawn "pcmanfm-qt"; }
   Mod+W       hotkey-overlay-title="Open a Firefox"         { spawn "firefox"; }
   Mod+G       hotkey-overlay-title="Open a Github Desktop"  { spawn "github-desktop"; }
   Mod+Y       hotkey-overlay-title="Open a YouTube Music"   { spawn "pear-desktop"; }
@@ -48,6 +48,9 @@ binds {
   Print         { screenshot; }
   Ctrl+Print    { screenshot-screen; }
   Alt+Print     { screenshot-window; }
+
+  // Open System Monitor
+  Ctrl+Shift+Escape hotkey-overlay-title="Open a System Monitor"        { spawn "qps"; }
 
   // Overview
   Mod+O   repeat=false  { toggle-overview; }

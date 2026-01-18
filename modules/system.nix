@@ -55,7 +55,7 @@
       allowedUDPPorts = [ 53317 ];
       allowedTCPPortRanges = [
         {
-          from = 1024;
+          from = 0;
           to = 65535;
         }
       ];
@@ -66,26 +66,28 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   environment.systemPackages = with pkgs; [
-    git
     wget
     eza
-    unrar
+    # unrar
     nil
     nixd
   ];
 
-  programs.gamemode.enable = true;
+  programs = {
+    git.enable = true;
+    gamemode.enable = true;
+  };
 
   security.rtkit.enable = true;
 
   services = {
     tuned.enable = true;
     upower.enable = true;
-    gnome.evolution-data-server.enable = true;
 
     xserver = {
       enable = true;
       videoDrivers = [ "amdgpu" ];
+      # libinput.enable = true;
 
       xkb = {
         layout = "us";
@@ -105,7 +107,6 @@
       # media-session.enable = true;
     };
 
-    # xserver.libinput.enable = true;
     # openssh.enable = true;
   };
 }

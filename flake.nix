@@ -32,7 +32,7 @@
       };
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         modules = [
           ./modules/hardware.nix
@@ -40,9 +40,9 @@
           ./modules/shell.nix
           ./modules/users.nix
           ./modules/fonts.nix
-          ./modules/de/plasma.nix
+          ./modules/rdbms.nix
+          ./modules/de/lxqt.nix
           ./modules/wm/niri.nix
-          ./modules/developments/rdbms.nix
 
           home-manager.nixosModules.home-manager
           {
@@ -50,18 +50,17 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "bak";
-              users.leo = {
+              users."src-06" = {
                 imports = [
                   ./home.nix
 
                   noctalia-shell.homeModules.default
                   ./modules/wm/noctalia.nix
 
-                  ./modules/developments/bun.nix
-                  ./modules/developments/cpp.nix
-                  ./modules/developments/nodejs.nix
-                  ./modules/developments/php.nix
-                  ./modules/developments/python.nix
+                  ./modules/dev/bun.nix
+                  ./modules/dev/cpp.nix
+                  ./modules/dev/nodejs.nix
+                  ./modules/dev/php.nix
                 ];
               };
             };

@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     nodePackages.nodejs
-    pnpm
+    nodePackages.pnpm
+    nodePackages.yarn
   ];
 }

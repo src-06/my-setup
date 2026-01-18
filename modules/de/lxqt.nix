@@ -2,20 +2,14 @@
 
 {
   environment.systemPackages = with pkgs; [
-    kdePackages.kdegraphics-thumbnailers
-    kdePackages.partitionmanager
-    kdePackages.kate
-    # kdePackages.sddm-kcm
-    kdePackages.plasma-firewall
-    firewalld
     mpv
-    haruna
+    gvfs
+    ffmpegthumbnailer
+    evince
   ];
 
-  services = {
-    # displayManager.sddm.enable = true;
-
-    xserver.displayManager.lightdm = {
+  services.xserver = {
+    displayManager.lightdm = {
       enable = true;
       greeters.slick = {
         enable = true;
@@ -27,12 +21,11 @@
           name = "Papirus-Dark";
           package = pkgs.papirus-icon-theme;
         };
-        theme.name = "Adwaita-dark";
         draw-user-backgrounds = true;
       };
-      background = "/usr/background/1309619-mirror.png";
+      background = "/usr/share/backgrounds/1309619-mirror.png";
     };
 
-    desktopManager.plasma6.enable = true;
+    desktopManager.lxqt.enable = true;
   };
 }
