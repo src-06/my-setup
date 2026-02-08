@@ -12,7 +12,7 @@ binds {
   // Suggested binds for running applications
   Mod+Return  hotkey-overlay-title="Open a Terminal"        { spawn-sh "kitty -e"; }
   Mod+E       hotkey-overlay-title="Open a File Manager"    { spawn "pcmanfm-qt"; }
-  Mod+W       hotkey-overlay-title="Open a Firefox"         { spawn "firefox"; }
+  Mod+W       hotkey-overlay-title="Open a Browser"         { spawn-sh "google-chrome"; }
   Mod+G       hotkey-overlay-title="Open a Github Desktop"  { spawn "github-desktop"; }
   Mod+Y       hotkey-overlay-title="Open a YouTube Music"   { spawn "pear-desktop"; }
 
@@ -41,16 +41,17 @@ binds {
   // Utility shortcuts
   Mod+V         hotkey-overlay-title="Open a clipboard hystory"         { spawn-sh "noctalia-shell ipc call launcher clipboard"; }
   Mod+semicolon hotkey-overlay-title="Open a emoji"                     { spawn-sh "noctalia-shell ipc call launcher emoji"; }
+  Mod+R         hotkey-overlay-title="Open a translator"                { spawn-sh "noctalia-shell ipc call plugin:translator toggle \"\""; }
   Mod+C         hotkey-overlay-title="Open a calculator on launcher"    { spawn-sh "noctalia-shell ipc call launcher calculator"; }
   Mod+L         hotkey-overlay-title="Launch lockscreen"                { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+
+  // Open System Monitor
+  Ctrl+Shift+Escape hotkey-overlay-title="Open a System Monitor"        { spawn "qps"; }
 
   // Screenshots
   Print         { screenshot; }
   Ctrl+Print    { screenshot-screen; }
   Alt+Print     { screenshot-window; }
-
-  // Open System Monitor
-  Ctrl+Shift+Escape hotkey-overlay-title="Open a System Monitor"        { spawn "qps"; }
 
   // Overview
   Mod+O   repeat=false  { toggle-overview; }
@@ -62,9 +63,9 @@ binds {
   Mod+BracketRight  { consume-or-expel-window-right; }
 
   // Switch width and height presets
-  Mod+R         { switch-preset-column-width; }
+  // Mod+R         { switch-preset-column-width; }
   // Mod+R      { switch-preset-column-width-back; } // Reverse width preset
-  Mod+Shift+R   { switch-preset-window-height; }
+  // Mod+Shift+R   { switch-preset-window-height; }
 
   // Togle maximize and fullscreen window
   Mod+F         { maximize-column; }
@@ -88,7 +89,7 @@ binds {
   // Switch between power profiles
   Mod+P     hotkey-overlay-title="Cycle power profiles" { spawn-sh "noctalia-shell ipc call powerProfile cycle"; }
 
-  // Mirror laptop display to HDMI.
+  // Mirror laptop display.
   Mod+Shift+P   hotkey-overlay-title="Mirror display (eDP-1)"   { spawn-sh "wl-mirror eDP-1"; }
 
   // Window keybind management?

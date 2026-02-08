@@ -9,8 +9,7 @@ window-rule {
   match app-id=r#"firefox$"# title="^Picture-in-Picture$"
   match app-id=r#"^lxqt-.*|pavu.*|.*copyq|qarma|.*portal-lxqt.*|.*conf$"#
   match title=r#"^Preferen.*|.*file.*|Password.*|Prop.*|Close.*|Select.*$"#
-  exclude app-id="lxqt-archiver"
-  match app-id="pcmanfm-qt" title=r#"^*Files"#
+  match title=r#"^*Files"# // app-id="pcmanfm-qt"
   open-floating true
 }
 

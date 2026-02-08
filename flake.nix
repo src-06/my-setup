@@ -16,12 +16,7 @@
   };
 
   outputs =
-    {
-      nixpkgs,
-      home-manager,
-      noctalia-shell,
-      ...
-    }:
+    { nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -40,11 +35,13 @@
           ./modules/shell.nix
           ./modules/users.nix
           ./modules/fonts.nix
-          ./modules/rdbms.nix
+          ./modules/virtualization.nix
+          ./modules/de/budgie.nix
           ./modules/de/lxqt.nix
+          ./modules/dm/lightdm.nix
           ./modules/wm/niri.nix
 
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -54,13 +51,8 @@
                 imports = [
                   ./home.nix
 
-                  noctalia-shell.homeModules.default
-                  ./modules/wm/noctalia.nix
-
-                  ./modules/dev/bun.nix
-                  ./modules/dev/cpp.nix
-                  ./modules/dev/nodejs.nix
-                  ./modules/dev/php.nix
+                  inputs.noctalia-shell.homeModules.default
+                  ./modules/qs/noctalia.nix
                 ];
               };
             };

@@ -5,7 +5,12 @@
     isNormalUser = true;
     home = "/home/src-06";
     description = "Gotthard Leo";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirt"
+      "podman"
+    ];
     shell = pkgs.fish;
   };
 

@@ -16,11 +16,11 @@
       alias clear "printf '\033[2J\033[3J\033[1;1H'"
       alias grep 'grep --color=auto'
 
-      alias u='sudo nix flake update --flake'
-      alias s='sudo nixos-rebuild switch --impure --flake'
-      alias b='sudo nixos-rebuild boot --impure --flake'
-      alias t='sudo nixos-rebuild test --impure --flake'
-      alias g='sudo nix-collect-garbage -d'
+      alias u 'sudo nix flake update --flake'
+      alias s 'sudo nixos-rebuild switch --impure --flake'
+      alias b 'sudo nixos-rebuild boot --impure --flake'
+      alias t 'sudo nixos-rebuild test --impure --flake'
+      alias g 'sudo nix-collect-garbage -d'
     '';
   };
 
@@ -31,9 +31,13 @@
       add_newline = false;
 
       format = ''
-        [╭──────────▶](blue bold) $directory$nix_shell
-        [│](blue bold) $os$username$cmd_duration$git_branch$git_commit$git_state$git_metrics$git_status$c$cpp$php$nodejs$bun$package
+        [╭──────────────▶](blue bold) $os$username
+        [│](blue bold) $directory$nix_shell$git_branch$git_commit$git_state$git_metrics$git_status$c$cpp$php$nodejs$bun$package
         [╰╴$character](blue bold)'';
+
+      right_format = ''
+        $cmd_duration
+      '';
 
       username = {
         show_always = true;
@@ -45,12 +49,17 @@
         error_symbol = "[✘](bold red)";
       };
 
-      os.disabled = false;
+      os = {
+        disabled = false;
+        style = "bold bright-blue";
+      };
 
       cmd_duration = {
         min_time = 0;
         format = "[ $duration](bold) ";
       };
+
+      cpp.disabled = false;
     };
 
     presets = [
